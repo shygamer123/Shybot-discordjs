@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+dconst { MessageEmbed } = require("discord.js");
 
 module.exports = {
   name: "achievement",

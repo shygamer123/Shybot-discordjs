@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const muteModel = require('../models/mute');
+const muteModel = require('../../models/mute');
 const ms = require('ms');
 const colors = ('RANDOM');
 

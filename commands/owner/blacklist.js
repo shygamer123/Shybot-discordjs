@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 const colors =('RANDOM')
-const client = require('../index.js')
+const client = require('../../index.js')
 const db = require('quick.db')
 
 module.exports = {

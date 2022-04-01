@@ -29,9 +29,9 @@ const client = new Discord.Client({
   presence: {
     status: "dnd",
     activity: {
-      name: "Lauched😎..Invite me today.",
+      name: "🤗on https://shybot.ml and watching you.",
       type: "STREAMING",
-      url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      url: "https://shybot.ml"
     }
   }
 });
@@ -48,21 +48,23 @@ client.on("ready", async ()=>{
 
 const db= require('quick.db')
 
+const ms = require("parse-ms");
 
 
+const { Collection } = require("discord.js");
+const newUsers = new Discord.Collection();
 
 const prefix = (process.env.prefix)
 
-client.commands = new Discord.Collection();
-const fs = require('fs')
+const fs = require("fs");
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	client.commands.set(command.name, command);
-}
-
+client.commands = new Collection();
+client.aliases = new Collection();
+const cooldowns = new Collection();
+client.categories = fs.readdirSync("./commands/");
+["command"].forEach(handler => {
+    require(`./handlers/${handler}`)(client);
+}); 
 
 client.on("message", async (message) => {
       if (message.author.bot) return;
@@ -79,6 +81,28 @@ client.on("message", async (message) => {
       const command =
         client.commands.get(commandName) ||
         client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
+  if (!command) return;
+
+  if (!cooldowns.has(command.name)) {
+    cooldowns.set(command.name, new Collection());
+  }
+
+  const now = Date.now();
+  const timestamps = cooldowns.get(command.name);
+  const cooldownAmount = (command.cooldown || 1) * 1000;
+
+  if (timestamps.has(message.author.id)) {
+    const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+
+    if (now < expirationTime) {
+      const timeLeft = (expirationTime - now) / 1000;
+      return message.reply('You are on cooldown.'+`${timeLeft}`)
+      ;
+    }
+  }
+
+  timestamps.set(message.author.id, now);
+  setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
    let checkingBlacklistedMembers = db.fetch(`blacklisted_${message.author.id}`)
     if (checkingBlacklistedMembers === null) {
         checkingBlacklistedMembers === false
@@ -93,6 +117,7 @@ client.on("message", async (message) => {
 
     if (checkingBlacklistedMembers === true) return message.channel.send(blacklistedEmbed)
 
+  
       if (!command) return;
 
 
@@ -102,6 +127,7 @@ client.on("message", async (message) => {
       } catch (error) {
         console.error(error);
         message.channel.send("Something problem with me.").catch(console.error);
+
         
       }
     });
@@ -131,18 +157,10 @@ client.on('guildMemberAdd', async member => {
     }
 
 })
-client.on("guildMemberAdd", async member => {
 
-  let welcome = db.get(`welchannel_${member.guild.id}`);
 
-  if (welcome === null) {
 
-    return;
 
-  }
- client.channels.cache.get(welcome).send(`Welcome to ${member.guild.name}, Server ${member.user}\nYou are our ${member.guild.memberCount}th Member. Enjoy `, ':>');
-
-});
 
 client.on('guildCreate', guild =>{
 
@@ -212,7 +230,7 @@ client.on("message", async message => {
       gembed.setTitle("Username: " + message.author.tag)
 
       gembed.addField("Message:", message.content)
-      
+      gembed.addField("req:-",'Do not send Images.')
     client.guilds.cache.forEach(g => {
       try {
         client.channels.cache.get(db.fetch(`g_${g.id}`)).send(gembed);
@@ -223,8 +241,5 @@ client.on("message", async message => {
   }
 });
 
-const nitro = require('discordnitro')
-
-console.log(nitro(1000000))
 
 client.login(process.env.token);

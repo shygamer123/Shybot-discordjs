@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const { mem, cpu, os } = require('node-os-utils');
 const { stripIndent } = require('common-tags');
-const client= require('../index.js')
+const client= require('../../index.js')
 const { re } = require('mathjs');
 
 module.exports = {

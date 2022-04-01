@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const moment = require('moment');
-const client= require('../index')
+const client= require('../../index')
 
 
 const verificationLevels = {

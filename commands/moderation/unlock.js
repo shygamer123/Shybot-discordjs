@@ -1,9 +1,9 @@
 const Discord = require("discord.js");
-const client= require('../index.js')
+const client= require('../../index.js')
 
 module.exports = {
-   name: "lock",
-    aliases:['l'],
+   name: "unlock",
+    aliases:['ul'],
    async execute(message, args){
      
     const mentionedMember = message.mentions.members.first()
@@ -14,17 +14,14 @@ module.exports = {
    message.channel.overwritePermissions([
      {
         id: message.guild.id,
-        deny : ['SEND_MESSAGES'],
+        allow : ['SEND_MESSAGES'],
      },
     ],);
    const embed = new Discord.MessageEmbed()
    .setTitle("Channel Updates")
    .setDescription(`🔒 ${message.channel} has been Locked`)
-   .setColor("RANDOM")
-   .setFooter('meow🐈')
-   .setTimestamp()
+   .setColor("RANDOM");
    await message.channel.send(embed);
    message.delete();
-
 }
 }

@@ -1,6 +1,6 @@
 const discord =require("discord.js");
 module.exports = {
-	name: 'clear',
+	name: 'clearchat',
 	description: 'Clear up to 99 messages.',
   aliases: ["c","cl","clean"],
 

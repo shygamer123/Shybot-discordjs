@@ -1,7 +1,7 @@
 
 const { Client, Message, MessageEmbed } = require('discord.js');
 require('discord-reply')
-const client = require('../index.js')
+const client = require('../../index.js')
 const ms = require("ms")
 module.exports = {
     name: 'reminder',

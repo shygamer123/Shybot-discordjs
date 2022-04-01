@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 const rgx = /^(?:<@!?)?(\d+)>?$/;
-const client= require('../index.js')
+const client= require('../../index.js')
 
 module.exports = {
     name: "stop",

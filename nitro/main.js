@@ -1,4 +1,8 @@
 const Timeout = new Map();
+
+const ms = require("parse-ms");
+
+
 module.exports = async (client, message, db) => {
   let checking = db.fetch(`nitroemoji_${message.guild.id}`)
   if(checking == true) 
@@ -39,10 +43,10 @@ module.exports = async (client, message, db) => {
 
   let webhook = await message.channel.fetchWebhooks();
   let number = randomNumber(1, 2);
-  webhook = webhook.find(x => x.name === "Dumb Bot Emojis" + number);
+  webhook = webhook.find(x => x.name === "Shy Bot" + number);
 
   if (!webhook) {
-    webhook = await message.channel.createWebhook(`Dumb Bot Emojis` + number, {
+    webhook = await message.channel.createWebhook(`Shy Bot` + number, {
       avatar: client.user.displayAvatarURL({ dynamic: true })
     });
   }
@@ -56,7 +60,7 @@ module.exports = async (client, message, db) => {
   webhook.send(msg).catch(err => { })
 
   await webhook.edit({
-    name: `Dumb Bot Emojis` + number,
+    name: `Shy Bot` + number,
     avatar: client.user.displayAvatarURL({ dynamic: true })
   })
     }
