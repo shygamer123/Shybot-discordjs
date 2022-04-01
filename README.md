@@ -27,3 +27,6 @@ Q. Why is the bot only working with music?
 Answer:- wait 5-10 minutes or just join our discord all the things will work soon.
 
 **Note:- All other things are available on discord server.**
+
+# Owner?
+Pratham/Shyboy/Vadish/Shinchan
