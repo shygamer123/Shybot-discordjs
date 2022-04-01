@@ -12,12 +12,18 @@ Special thanks to my friends, close people, discord.js helping server to make th
 # How to run it?
 For this you need to join our [Discord server](https://discord.gg/chYA3dQEWw)
 
+and go to announcement channel and see pins.
+
 # How do the orignal version run?
 Orignal version works with repl with 2 other repls.
+
 1.Music repl
+
 2.All other command repl.
 
 # fAQ
 Q. Why is the bot only working with music?
 
 Answer:- wait 5-10 minutes or just join our discord all the things will work soon.
+
+**Note:- All other things are available on discord server.**
