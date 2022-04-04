@@ -20,7 +20,7 @@ async execute(message,args){
             .setTimestamp(message.createdAt)
             .setColor(colors.red))
     }
-    else if (!message.guild.me.hasPermission(['MANAGE_ROLES', 'MANAGE_CHANNELS'])) {
+    else if (!message.guild.me.hasPermission(['MANAGE_ROLES'])) {
         return message.channel.send(new Discord.MessageEmbed()
             .setAuthor('Problem:-', message.author.avatarURL())
             .setDescription('**I don\'t have permisison to MANAGE_ROLES and MANAGE_CHANNELS.**')
