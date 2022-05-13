@@ -2,6 +2,7 @@ const Discord = require('discord.js')
 module.exports={
   name:'membercount',
   aliases:['mc'],
+    cooldown:5,
   execute(message, args){
 
     const mc = new Discord.MessageEmbed();

@@ -7,6 +7,7 @@ const { re } = require('mathjs');
 module.exports = {
     name: "botstats",
     aliases:['bs'],
+    cooldown:5,
     async execute(message, args) {
 
         const { totalMemMb, usedMemMb } = await mem.info();

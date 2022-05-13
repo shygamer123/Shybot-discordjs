@@ -2,6 +2,7 @@
 
   module.exports = {
       name: 'join', 
+      cooldown:5,
       async execute(message, args) {
               const voiceChannel = message.member.voice.channel;
               const embed = new MessageEmbed()

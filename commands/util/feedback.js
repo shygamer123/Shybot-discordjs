@@ -6,7 +6,7 @@ module.exports = {
     description: 'Put in feedback for the bot',
     usage: 'feedback <feedback>',
     category: 'Utility',
-    guildOnly: true,
+    cooldown:5,
     async execute(message, args) {
         let feednumber = message.content.split(" ").slice(1)
         let feedstr = message.content.split(" ").slice(2).join(" ");

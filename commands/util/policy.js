@@ -3,9 +3,10 @@ const Discord = require("discord.js");
 
 module.exports = {
   name: "policy",
+    cooldown:5,
   execute( message, args){
     const embed = new Discord.MessageEmbed()
-      .setTitle("INFINITY BOT PRIVACY POLICY")
+      .setTitle("SHY BOT PRIVACY POLICY")
       .setDescription("By using the bot you agree to our privacy policy")
       embed.addField(
         "**WHAT DATA DO WE STORE?**",

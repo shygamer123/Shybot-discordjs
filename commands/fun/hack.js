@@ -3,6 +3,7 @@ const client= require('../../index.js')
 const ms = require("ms")
 module.exports = {
   name: "hack",
+    cooldown:5,
   async execute(message, args) {
     const hacked = message.mentions.users.first();
     const user = message.mentions.users.first();

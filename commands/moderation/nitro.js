@@ -9,19 +9,18 @@ module.exports = {
   aliases: ['nitro'],
   async execute( message, args){
 
-   if(!message.member.hasPermission('ADMINISTRATOR')) return;
-   if(db.fetch(`nitroemoji_${message.guild.id}`) == true) {
-          var aembed = new Discord.MessageEmbed()
-   .setDescription(" **Successfull** ")
-   .addField("Now Nitro Emojis:", "Disabled")
-   message.channel.send(aembed);
-   } else {
-       db.set(`nitroemoji_${message.guild.id}`, true)
-           var aembed = new Discord.MessageEmbed()
-   .setDescription(" **Successfull** ")
-   .addField("Now Nitro Emojis:", "Enabled")
-   message.channel.send(aembed);
-   }
-
+   if(!message.member.hasPermission('ADMINISTRATOR')){ 
+    return;
   }
-}
+    if(args[0]=='enable'){
+      db.set(`nitroemojis_${message.guild.id}`,args[0])
+      message.channel.send('enabled')
+    }
+    if(args[0]=='disable'){
+db.set(`nitroemojis_${message.guild.id}`,args[0])
+      message.channel.send('disabled')
+    }
+    if(args[0]==null){
+      message.channel.send('write enable/disable')
+    };
+}}

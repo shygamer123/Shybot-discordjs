@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 module.exports = {
     name: "serverlist",
-    aliases:['sl'],
+    aliases:['sl','servers'],
     description: "Displays the list of Servers!",
 
     async execute(message, args, client){

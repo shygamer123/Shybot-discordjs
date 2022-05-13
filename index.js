@@ -23,15 +23,15 @@ const moment = require("moment");
 
 const mongoose = require("mongoose");
 const mongo_url=(process.env.mongo)
-
+const jimp = require('jimp');
 const client = new Discord.Client({
   disableMentions:'everyone',
   presence: {
     status: "dnd",
     activity: {
-      name: "🤗on https://shybot.ml and watching you.",
+      name: "with cat (Meow~)",
       type: "STREAMING",
-      url: "https://shybot.ml"
+      url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     }
   }
 });
@@ -44,11 +44,14 @@ client.on("ready", async ()=>{
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
+  console.log('Connected to db')
 })
 
 const db= require('quick.db')
 
 const ms = require("parse-ms");
+
+process.on("unhandledRejection", console.error);
 
 
 const { Collection } = require("discord.js");
@@ -96,7 +99,7 @@ client.on("message", async (message) => {
 
     if (now < expirationTime) {
       const timeLeft = (expirationTime - now) / 1000;
-      return message.reply('You are on cooldown.'+`${timeLeft}`)
+      return message.reply('You are on cooldown of, '+`${timeLeft}`)
       ;
     }
   }
@@ -138,29 +141,6 @@ client.on("message", async message => {
 //-------//
 
 
-const muteModel = require('./models/mute')
-client.on('guildMemberAdd', async member => {
-
-    const muteDoc = await muteModel.findOne({
-        guildID: member.guild.id,
-        memberID: member.id,
-    })
-  
-    if (muteDoc) {
-        const muteRole = member.guild.roles.cache.find(r => r.name == 'Muted')
-  
-        if (muteRole) member.roles.add(muteRole.id).catch(err => console.log(err))
-  
-        muteDoc.memberRoles = []
-  
-        await muteDoc.save().catch(err => console.log(err))
-    }
-
-})
-
-
-
-
 
 client.on('guildCreate', guild =>{
 
@@ -179,6 +159,7 @@ client.on('guildCreate', guild =>{
 });
 
 
+
 client.on('guildDelete', guild =>{
     const channelId = '939784419357638656';//add your channel ID
     const channel = client.channels.cache.get(channelId); //This Gets That Channel
@@ -193,13 +174,14 @@ client.on('guildDelete', guild =>{
     channel.send(embed);
 });
 
+
 client.on("message", async message => { 
     const args = message.content
     .slice()
     .trim()
     .split(/ +/g);
   const command = args.shift().toLowerCase();
-  if (command === "sh!global") {
+  if (command === "shinglobal") {
     const channel = message.mentions.channels.first();
     if (!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send(`You are missing the **MANAGE GUILD** permission!`)
     if (!channel)
@@ -209,7 +191,7 @@ client.on("message", async message => {
     db.set(`g_${message.guild.id}`, `${channel.id}`);
     message.channel.send(`Global Chat Set to ${channel}!`);
   }
-  if (command === "sh!globaldel") {
+  if (command === "shinglobaldelete") {
     const channel = message.mentions.channels.first();
     if (!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send(`You are missing the **MANAGE GUILD** permission!`)
     if (!channel)
@@ -240,6 +222,18 @@ client.on("message", async message => {
     });
   }
 });
+
+client.on('guildMemberAdd', async member => {
+let channel =db.fetch(`wel_${member.guild.id}`); 
+  if (channel === null) {
+
+    return;
+
+  }
+client.channels.cache.get(channel).send(` ●▬▬▬▬▬▬▬▬๑۩✰۩๑▬▬▬▬▬▬▬▬●
+✰・${member.user} joined the ${member.guild.name} \n ●▬▬▬▬▬▬▬▬๑۩✰۩๑▬▬▬▬▬▬▬▬● \n ╰・⌬・${member.guild.name} has now ${member.guild.memberCount} members`)
+    if (!channel) return;
+})
 
 
 client.login(process.env.token);

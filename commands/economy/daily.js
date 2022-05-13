@@ -5,9 +5,12 @@ const client = require('../../index.js')
 
 module.exports = {
     name: 'daily',
-  cooldown:'10',
+  cooldown:5,
   
     async execute( message, args) {
+      let member = message.author;
+      db.add(`commands_${member.id}`,1)
+      
         let timeout = 86400000;
         let amount = 1000;
         let user = message.author
@@ -26,7 +29,7 @@ module.exports = {
             db.set(`daily_${user.id}`, Date.now())
 
             const dailySuccess = new MessageEmbed()
-            .setDescription(`You got \$${amount} as Your Daily Cash`)
+            .setDescription(`You have collected ${amount} shin coins, as you daily coins.`)
             .setColor("RANDOM")
 
             message.channel.send(dailySuccess)

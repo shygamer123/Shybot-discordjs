@@ -4,6 +4,7 @@ const covidapi = require('covidapi')
 
 module.exports = {
   name: 'covid',
+    cooldown:5,
 	async execute(message, args) {
 		if (!args[0]) {
 			message.react('👎')

@@ -1,6 +1,7 @@
 const db = require("quick.db");
 module.exports = {
   name: "afk",
+    cooldown:5,
   async execute( message, args){
       if (db.has(`${message.guild.id}_${message.author.id}` + '.afk')) {
        message.member.setNickname('').catch(error => console.log("Couldn't update your nickname."));

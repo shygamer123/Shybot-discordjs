@@ -5,7 +5,7 @@ module.exports = {
     name: 'inventory',
     description: "View Your Inventory",
     aliases: ['inven', 'int', 'inv'],
-  cooldown:10,
+    cooldown:5,
     usage: "[prefix]inventory",
     async execute( message, args){
 
@@ -13,7 +13,7 @@ module.exports = {
         if(items === null) items = "Their is nothing in your inventory";
 
         const Embed = new MessageEmbed()
-        .addField('Inventory', items)
+        .addField('Inventory', items, true)
         .setColor("RANDOM")
       .setTimestamp()
       .setFooter(`Requested by ${message.author.username}`)

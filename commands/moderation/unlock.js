@@ -19,7 +19,7 @@ module.exports = {
     ],);
    const embed = new Discord.MessageEmbed()
    .setTitle("Channel Updates")
-   .setDescription(`🔒 ${message.channel} has been Locked`)
+   .setDescription(`🔒 ${message.channel} has been unlocked`)
    .setColor("RANDOM");
    await message.channel.send(embed);
    message.delete();

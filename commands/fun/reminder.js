@@ -5,6 +5,7 @@ const client = require('../../index.js')
 const ms = require("ms")
 module.exports = {
     name: 'reminder',
+    cooldown:5,
      async execute( message, args){
         let time = args[0]
         if(!time) {

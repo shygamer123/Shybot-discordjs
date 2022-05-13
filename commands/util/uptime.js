@@ -1,6 +1,7 @@
 module.exports = {
   name: "uptime",
   aliases: ["u"],
+    cooldown:5,
   execute(message) {
     let seconds = Math.floor(message.client.uptime / 1000);
     let minutes = Math.floor(seconds / 60);

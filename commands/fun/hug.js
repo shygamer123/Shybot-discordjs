@@ -4,14 +4,14 @@ const API = require('anime-images-api')
 const images_api = new API() 
 
 module.exports = {
-  name: "slap",
+  name: "hug",
     cooldown:5,
   async execute( message, args)  {  
   let user  = message.mentions.users.first() || message.author
-  images_api.sfw.slap().then(response => {
+  images_api.sfw.hug().then(response => {
 
     const gif= new Discord.MessageEmbed()
-      .setAuthor(`${user.username} get slaped by ${message.author.username} `)
+      .setAuthor(`${user.username} get hugged by ${message.author.username} `)
     .setImage(response.image)
             message.channel.send(gif)
         

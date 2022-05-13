@@ -1,9 +1,11 @@
-dconst { MessageEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 
 module.exports = {
   name: "achievement",
     aliases:['ach'],
+    cooldown:5,
   async execute( message, args) {
+    
     const text = args.join("+");
     const e = new MessageEmbed()
       e.setTitle("MineCraft achievement!")

@@ -4,6 +4,7 @@ const Discord = require("discord.js");
 module.exports = {
   name: "avatar",
     aliases:['av'],
+    cooldown:5,
  async execute(message, args) {
     
     const Member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.member;

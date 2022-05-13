@@ -4,17 +4,17 @@ const ms = require('parse-ms');
 const client = require('../../index.js')
 
 module.exports = {
-    name: 'deposit',
+    name: 'withdraw',
     description: "Deposit Money",
     usage: "[prefix]deposit <amount>",
-    aliases: ['dep'],
-  cooldown:5,
+    aliases: ['with'],
+    cooldown:5,
     async execute( message, args){
 
       const member= message.author;
       db.add(`commands_${member.id}`,1)
 
-        let all = db.fetch(`money_${member.id}`)
+        let all = db.fetch(`bank_${member.id}`)
 
         if(args[0] === "all") args[0] = all
         if(args[0] === "max") args[0] = all
@@ -22,9 +22,9 @@ module.exports = {
 
         if (!args[0]) {
             const depositError = new MessageEmbed()
-                .setTitle("You Need to Give a Valid Amount to Deposit")
+                .setTitle("You Need to Give a Valid Amount to withdraw")
                 .setColor("RANDOM")
-                .setFooter("You can do `shin dep all` to deposit all your cash at once")
+                .setFooter("You can do `shin with all` to withdraw all your cash at once")
 
             return message.channel.send(depositError)
         }
@@ -50,12 +50,12 @@ module.exports = {
 
 
         
-        db.subtract(`money_${member.id}`, args[0])
-        db.add(`bank_${member.id}`, args[0])
+        db.add(`money_${member.id}`, args[0])
+        db.subtract(`bank_${member.id}`, args[0])
         let bankBal = db.fetch(`bank_${message.author.id}`)
 
         let depositSuccess = new MessageEmbed()
-            .setDescription(`Successfully Deposited ${args[0]} shin coins to Your Bank Account! \n Your new bank balance is ${bankBal} shin coins`)
+            .setDescription(`Successfully withdrawed ${args[0]} shin coins from you Bank Account! \n Your new bank balance is ${bankBal} shin coins`)
             .setColor("RANDOM")
 
         message.channel.send(depositSuccess)

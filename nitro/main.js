@@ -4,8 +4,10 @@ const ms = require("parse-ms");
 
 
 module.exports = async (client, message, db) => {
-  let checking = db.fetch(`nitroemoji_${message.guild.id}`)
-  if(checking == true) 
+  
+      if (message.author.bot) return;
+  let checking = db.fetch(`nitroemojis_${message.guild.id}`)
+  if(checking == "enable") 
   {
     let msg = message.content;
 
@@ -17,10 +19,7 @@ module.exports = async (client, message, db) => {
    if(found) {
     const timePassed = Date.now() - found;
     const timeLeft = timeout - timePassed;
-    return message.lineReply({embed: {
-     color: 16734039,
-     description: ` ❌ | ${message.author} slow down! You have to wait \`${ms(timeLeft)}\` before you can use this bot Emojis again!`
-    }});
+    return;
      } else {
       
         Timeout.set(key, Date.now());
